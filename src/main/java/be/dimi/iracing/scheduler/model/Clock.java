@@ -18,7 +18,7 @@ import java.util.Calendar;
 public class Clock {
 
     public static void showClock(final Label gmtLabel){
-        final DateFormat format = new SimpleDateFormat("HH:mm.ss");
+        final DateFormat format = new SimpleDateFormat("HH:mm:ss");
         final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
