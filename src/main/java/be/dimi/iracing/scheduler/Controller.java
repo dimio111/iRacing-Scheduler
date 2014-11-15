@@ -3,6 +3,7 @@ package be.dimi.iracing.scheduler;
 import be.dimi.iracing.scheduler.model.Clock;
 import be.dimi.iracing.scheduler.model.RacingList;
 import be.dimi.iracing.scheduler.race.RaceModel;
+import be.dimi.iracing.scheduler.timer.RacingTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.Timer;
 
 public class Controller
 {
@@ -35,6 +38,14 @@ public class Controller
     }
 
     public void alarm(){
+        Date date = scheduleList.getSelectionModel().getSelectedItem().getDate();
+
+        //Now create the time and schedule it
+        Timer timer = new Timer();
+
+        //Use this if you want to execute it once
+        timer.schedule(new RacingTimer(), date);
+
         String fxmlFile = "/fxml/alarm-set.fxml";
         FXMLLoader loader = new FXMLLoader();
         Parent rootNode = null;
