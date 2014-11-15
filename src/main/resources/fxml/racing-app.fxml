@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.HelloController">
+    <children><Button layoutX="408.0" layoutY="329.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" text="Refresh" /><ListView fx:id="sheduleList" editable="true" layoutX="33.0" layoutY="36.0" prefHeight="326.0" prefWidth="275.0" /><MenuBar>
+        <menus>
+            <Menu mnemonicParsing="false" text="File">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Open file" />
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar><RadioButton layoutX="410.0" layoutY="169.0" mnemonicParsing="false" text="Oval" /><RadioButton layoutX="408.0" layoutY="213.0" mnemonicParsing="false" text="Road" /><Label fx:id="gmtLabel" layoutX="410.0" layoutY="36.0" prefHeight="41.0" prefWidth="160.0" text="GMT" textAlignment="CENTER">
+        <font>
+            <Font size="22.0" />
+        </font></Label><Label layoutX="410.0" layoutY="97.0" prefHeight="29.0" prefWidth="113.0" text="Local" textAlignment="CENTER">
+        <font>
+            <Font size="22.0" />
+        </font></Label><Button fx:id="refreshButton" layoutX="408.0" layoutY="267.0" mnemonicParsing="false" onAction="#refresh" prefHeight="33.0" prefWidth="113.0" text="Refresh" />
+    </children></AnchorPane>
