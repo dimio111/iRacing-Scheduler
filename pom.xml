@@ -32,7 +32,7 @@
                 <version>2.0</version>
                 <configuration>
 
-                    <mainClass>mvn-test.MainApp</mainClass>
+                    <mainClass>be.dimi.iracing.scheduler.MainApp</mainClass>
 
                     <!-- only required if signing the jar file -->
                     <keyStoreAlias>example-user</keyStoreAlias>
@@ -68,15 +68,6 @@
 
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>javafx</artifactId>
-            <version>2.2</version>
-            <systemPath>${java.home}/lib/jfxrt.jar</systemPath>
-            <scope>system</scope>
-        </dependency>
-
         <!-- MigLayout -->
 
         <dependency>
