@@ -16,19 +16,7 @@ public class RaceModel implements Comparable<RaceModel>{
     private int laps;
 
     public Date getDate() {
-        return date;
-    }
-
-    public String getSeries() {
-        return series;
-    }
-
-    public String getTrack() {
-        return track;
-    }
-
-    public int getLaps() {
-        return laps;
+        return this.date;
     }
 
     @Override

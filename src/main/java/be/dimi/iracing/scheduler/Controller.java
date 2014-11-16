@@ -28,22 +28,18 @@ public class Controller
 
     @FXML
     protected void initialize(){
-        Clock.showClock(gmtLabel);
-        Clock.showClock(localLabel);
+        Clock.showGmtClock(gmtLabel);
+        Clock.showLocalClock(localLabel);
         RacingList.fillList(scheduleList);
     }
 
     public void refresh(){
-        RacingList.refresh(scheduleList);
+        RacingList.refresh();
     }
 
     public void alarm(){
         Date date = scheduleList.getSelectionModel().getSelectedItem().getDate();
-
-        //Now create the time and schedule it
         Timer timer = new Timer();
-
-        //Use this if you want to execute it once
         timer.schedule(new RacingTimer(), date);
 
         String fxmlFile = "/fxml/alarm-set.fxml";
@@ -63,9 +59,4 @@ public class Controller
         stage.setScene(scene);
         stage.show();
     }
-
-    public ListView<RaceModel> getListView(){
-       return scheduleList;
-    }
-
 }

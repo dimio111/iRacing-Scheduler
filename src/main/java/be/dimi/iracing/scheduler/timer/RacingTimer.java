@@ -5,7 +5,6 @@ import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -14,8 +13,7 @@ import java.util.TimerTask;
 /**
  * Created by Dimitri on 15/11/2014.
  */
-public class RacingTimer extends TimerTask
-{
+public class RacingTimer extends TimerTask {
 
     @Override
     public void run() {

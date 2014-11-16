@@ -13,37 +13,34 @@ import java.util.*;
 public class RacingList {
 
     private static ObservableList<RaceModel> observableList = FXCollections.observableArrayList();
-    private static List<RaceModel> racingSet = new ArrayList<RaceModel>();
     private static ListView<RaceModel> storedListView;
 
     public static void fillList(ListView<RaceModel> listView){
-        observableList.addAll(racingSet);
         Collections.sort(observableList);
         listView.setItems(observableList);
         storedListView = listView;
     }
 
-    public static void refresh(ListView<RaceModel> listView){
-        filterSet();
+    public static void refresh(){
+        filterList();
         storedListView.setItems(observableList);
     }
 
     public static void addToRacingList(List<RaceModel> list){
-        racingSet.addAll(list);
-        filterSet();
-        observableList.addAll(racingSet);
+        observableList.addAll(list);
+        filterList();
         Collections.sort(observableList);
         storedListView.setItems(observableList);
     }
 
-    public static void filterSet(){
-        List<RaceModel> toBeRemoved = new ArrayList<RaceModel>();
+    public static void filterList(){
+        List<RaceModel> toBeRemoved = new ArrayList<>();
         Date date = new Date();
-        for(RaceModel raceModel : racingSet){
+        for(RaceModel raceModel : observableList){
            if(raceModel.getDate().before(date)){
                toBeRemoved.add(raceModel);
            }
         }
-        racingSet.removeAll(toBeRemoved);
+        observableList.removeAll(toBeRemoved);
     }
 }

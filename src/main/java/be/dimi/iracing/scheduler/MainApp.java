@@ -17,7 +17,10 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainApp extends Application {
 
@@ -28,7 +31,7 @@ public class MainApp extends Application {
     }
 
     public void start(Stage stage) throws Exception {
-        log.info("Starting Hello JavaFX and Maven demonstration application");
+        log.info("Starting iRacing Scheduler " + new SimpleDateFormat("mm/dd/yyyy").format(new Date()));
 
         String fxmlFile = "/fxml/racing-app.fxml";
         log.debug("Loading FXML for main view from: {}", fxmlFile);
@@ -43,7 +46,7 @@ public class MainApp extends Application {
 //        stage.setMaxHeight(600);
 //        stage.setMaxWidth(400);
         stage.setResizable(false);
-        stage.setTitle("Iracing time planner");
+        stage.setTitle("iRacing Scheduler");
         stage.setScene(scene);
         stage.show();
     }
@@ -59,12 +62,14 @@ public class MainApp extends Application {
         openItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent Event) {
-                String currentDir = System.getProperty("user.dir") + File.separator;
+                String currentDir = FileSystemView.getFileSystemView().getHomeDirectory() + File.separator;
 
                 FileChooserBuilder fcb = FileChooserBuilder.create();
                 FileChooser fc = fcb.title("Open Dialog").initialDirectory(new File(currentDir)).build();
                 File selectedFile = fc.showOpenDialog(link);
-                CsvHandler.handleNewCsv(selectedFile.getPath());
+                if(selectedFile != null){
+                    CsvHandler.handleNewCsv(selectedFile.getPath());
+                }
             }
         });
 
