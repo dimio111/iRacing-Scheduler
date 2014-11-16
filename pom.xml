@@ -21,10 +21,17 @@
     </properties>
 
     <build>
-
         <finalName>iRacing-Scheduler</finalName>
-
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -43,8 +50,8 @@
         </plugins>
     </build>
 
-
     <dependencies>
+
         <!-- MigLayout -->
         <dependency>
             <groupId>com.miglayout</groupId>
@@ -53,7 +60,6 @@
         </dependency>
 
         <!-- Apache Commons -->
-
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -61,7 +67,6 @@
         </dependency>
 
         <!-- Logging  -->
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -88,7 +93,6 @@
             <artifactId>opencsv</artifactId>
             <version>2.3</version>
         </dependency>
-
 
     </dependencies>
 </project>
