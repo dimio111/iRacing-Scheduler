@@ -52,6 +52,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>2.3</version>
+        </dependency>
+
         <!-- MigLayout -->
         <dependency>
             <groupId>com.miglayout</groupId>
@@ -86,12 +92,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sf.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>2.3</version>
         </dependency>
 
     </dependencies>
