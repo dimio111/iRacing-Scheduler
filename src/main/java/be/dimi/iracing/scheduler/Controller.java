@@ -46,7 +46,7 @@ public class Controller
 
     public void alarm(){
 
-        long timezoneAlteredTime = scheduleList.getSelectionModel().getSelectedItem().getDate().getTime() + TimeZone.getTimeZone("Europe/Brussels").getRawOffset();
+        long timezoneAlteredTime = scheduleList.getSelectionModel().getSelectedItem().getDate().getTime() + Calendar.getInstance().getTimeZone().getRawOffset();
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/London"));
         cal.setTimeInMillis(timezoneAlteredTime);
 

@@ -37,8 +37,12 @@ public class RacingList {
     public static void filterList(){
         List<RaceModel> toBeRemoved = new ArrayList<>();
         Date date = new Date();
+        long timezoneAlteredTime = date.getTime() - Calendar.getInstance().getTimeZone().getRawOffset();
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/London"));
+        cal.setTimeInMillis(timezoneAlteredTime);
+
         for(RaceModel raceModel : observableList){
-           if(raceModel.getDate().before(date)){
+           if(raceModel.getDate().before(cal.getTime())){
                toBeRemoved.add(raceModel);
            }
         }
