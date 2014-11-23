@@ -1,6 +1,7 @@
 package be.dimi.iracing.scheduler;
 
 import be.dimi.iracing.scheduler.csv.CsvHandler;
+import be.dimi.iracing.scheduler.save.ListSaver;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -59,9 +61,10 @@ public class MainApp extends Application {
         // --- Menu File
         Menu menuFile = new Menu("File");
         MenuItem openItem = new MenuItem("Open");
-        //MenuItem saveItem = new MenuItem("Save");
+        MenuItem saveItem = new MenuItem("Save");
         setFileOpenAction(openItem);
-        menuFile.getItems().addAll(openItem);
+        setFileSaveAction(saveItem);
+        menuFile.getItems().addAll(openItem,saveItem);
         menuBar.getMenus().addAll(menuFile);
         ((AnchorPane) scene.getRoot()).getChildren().addAll(menuBar);
     }
@@ -73,7 +76,7 @@ public class MainApp extends Application {
                 String currentDir = FileSystemView.getFileSystemView().getHomeDirectory() + File.separator;
 
                 FileChooserBuilder fcb = FileChooserBuilder.create();
-                FileChooser fc = fcb.title("Open Dialog").initialDirectory(new File(currentDir)).build();
+                FileChooser fc = fcb.title("Open").initialDirectory(new File(currentDir)).build();
                 File selectedFile = fc.showOpenDialog(stage);
                 if (selectedFile != null) {
                     CsvHandler.handleNewCsv(selectedFile.getPath());
@@ -82,5 +85,16 @@ public class MainApp extends Application {
         });
     }
 
-
+    private void setFileSaveAction(MenuItem menuItem){
+        menuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent Event) {
+                try {
+                    ListSaver.saveList();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

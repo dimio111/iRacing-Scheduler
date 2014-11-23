@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -42,5 +43,9 @@ public class RacingList {
            }
         }
         observableList.removeAll(toBeRemoved);
+    }
+
+    public static ListView<RaceModel> getStoredListView() {
+        return storedListView;
     }
 }

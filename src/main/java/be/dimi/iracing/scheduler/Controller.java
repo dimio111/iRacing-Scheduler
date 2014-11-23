@@ -3,6 +3,7 @@ package be.dimi.iracing.scheduler;
 import be.dimi.iracing.scheduler.model.Clock;
 import be.dimi.iracing.scheduler.model.RacingList;
 import be.dimi.iracing.scheduler.race.RaceModel;
+import be.dimi.iracing.scheduler.save.ListSaver;
 import be.dimi.iracing.scheduler.timer.RacingTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.Timer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Controller
 {
@@ -31,6 +33,11 @@ public class Controller
         Clock.showGmtClock(gmtLabel);
         Clock.showLocalClock(localLabel);
         RacingList.fillList(scheduleList);
+        try {
+            ListSaver.readList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void refresh(){
@@ -38,9 +45,13 @@ public class Controller
     }
 
     public void alarm(){
-        Date date = scheduleList.getSelectionModel().getSelectedItem().getDate();
+
+        long timezoneAlteredTime = scheduleList.getSelectionModel().getSelectedItem().getDate().getTime() + TimeZone.getTimeZone("Europe/Brussels").getRawOffset();
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/London"));
+        cal.setTimeInMillis(timezoneAlteredTime);
+
         Timer timer = new Timer();
-        timer.schedule(new RacingTimer(), date);
+        timer.schedule(new RacingTimer(), cal.getTime());
 
         String fxmlFile = "/fxml/alarm-set.fxml";
         FXMLLoader loader = new FXMLLoader();
