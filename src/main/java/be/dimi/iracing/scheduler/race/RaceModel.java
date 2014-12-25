@@ -1,5 +1,6 @@
 package be.dimi.iracing.scheduler.race;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,7 +9,7 @@ import java.util.Date;
 /**
  * Created by Dimitri on 15/11/2014.
  */
-public class RaceModel implements Comparable<RaceModel>{
+public class RaceModel implements Comparable<RaceModel>, Serializable{
 
     private Date date;
     private String series;

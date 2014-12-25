@@ -25,12 +25,14 @@ import java.util.Date;
 public class MainApp extends Application {
 
     private static final Logger log = LoggerFactory.getLogger(MainApp.class);
+    private Stage stage = null;
 
     public static void main(String[] args) throws Exception {
         launch(args);
     }
 
     public void start(Stage stage) throws Exception {
+        this.stage = stage;
         log.info("Starting iRacing Scheduler " + new SimpleDateFormat("mm/dd/yyyy").format(new Date()));
 
         String fxmlFile = "/fxml/racing-app.fxml";
@@ -43,38 +45,41 @@ public class MainApp extends Application {
 //        scene.getStylesheets().add("/styles/styles.css");
 
         setMenus(scene, stage);
-//        stage.setMaxHeight(600);
-//        stage.setMaxWidth(400);
+        stage.setMaxHeight(490);
+        stage.setMaxWidth(650);
         stage.setResizable(false);
         stage.setTitle("iRacing Scheduler");
         stage.setScene(scene);
         stage.show();
     }
 
-    private void setMenus(Scene scene, final Stage link) {
+    private void setMenus(Scene scene, Stage link) {
         MenuBar menuBar = new MenuBar();
         menuBar.setMinWidth(660);
         // --- Menu File
         Menu menuFile = new Menu("File");
         MenuItem openItem = new MenuItem("Open");
-        menuFile.getItems().add(openItem);
+        //MenuItem saveItem = new MenuItem("Save");
+        setFileOpenAction(openItem);
+        menuFile.getItems().addAll(openItem);
+        menuBar.getMenus().addAll(menuFile);
+        ((AnchorPane) scene.getRoot()).getChildren().addAll(menuBar);
+    }
 
-        openItem.setOnAction(new EventHandler<ActionEvent>() {
+    private void setFileOpenAction(MenuItem menuItem){
+        menuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent Event) {
                 String currentDir = FileSystemView.getFileSystemView().getHomeDirectory() + File.separator;
 
                 FileChooserBuilder fcb = FileChooserBuilder.create();
                 FileChooser fc = fcb.title("Open Dialog").initialDirectory(new File(currentDir)).build();
-                File selectedFile = fc.showOpenDialog(link);
+                File selectedFile = fc.showOpenDialog(stage);
                 if(selectedFile != null){
                     CsvHandler.handleNewCsv(selectedFile.getPath());
                 }
             }
         });
-
-        menuBar.getMenus().addAll(menuFile);
-        ((AnchorPane) scene.getRoot()).getChildren().addAll(menuBar);
     }
 
 
