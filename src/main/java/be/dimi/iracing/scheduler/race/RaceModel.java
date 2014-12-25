@@ -14,6 +14,7 @@ public class RaceModel implements Comparable<RaceModel>, Serializable{
     private Date date;
     private String series;
     private String track;
+    private TrackType trackType;
     private int laps;
 
     public Date getDate() {
@@ -82,6 +83,11 @@ public class RaceModel implements Comparable<RaceModel>, Serializable{
         }
         public Builder laps(final String str){
             raceModel.laps = Integer.valueOf(str);
+            return this;
+        }
+
+        public Builder trackType(final TrackType trackType){
+            raceModel.trackType = trackType;
             return this;
         }
     }

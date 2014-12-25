@@ -14,7 +14,7 @@ import java.util.*;
 public class RacingList {
 
     private static ObservableList<RaceModel> observableList = FXCollections.observableArrayList();
-    private static ListView<RaceModel> storedListView;
+    private static ListView<RaceModel> storedListView = new ListView<>();
 
     public static void fillList(ListView<RaceModel> listView){
         Collections.sort(observableList);
@@ -35,18 +35,19 @@ public class RacingList {
     }
 
     public static void filterList(){
-        List<RaceModel> toBeRemoved = new ArrayList<>();
-        Date date = new Date();
-        long timezoneAlteredTime = date.getTime() - Calendar.getInstance().getTimeZone().getRawOffset();
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/London"));
-        cal.setTimeInMillis(timezoneAlteredTime);
-
-        for(RaceModel raceModel : observableList){
-           if(raceModel.getDate().before(cal.getTime())){
-               toBeRemoved.add(raceModel);
-           }
-        }
-        observableList.removeAll(toBeRemoved);
+        //TODO uncomment filtering when everything works
+//        List<RaceModel> toBeRemoved = new ArrayList<>();
+//        Date date = new Date();
+//        long timezoneAlteredTime = date.getTime() - Calendar.getInstance().getTimeZone().getRawOffset();
+//        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/London"));
+//        cal.setTimeInMillis(timezoneAlteredTime);
+//
+//        for(RaceModel raceModel : observableList){
+//           if(raceModel.getDate().before(cal.getTime())){
+//               toBeRemoved.add(raceModel);
+//           }
+//        }
+//        observableList.removeAll(toBeRemoved);
     }
 
     public static ListView<RaceModel> getStoredListView() {

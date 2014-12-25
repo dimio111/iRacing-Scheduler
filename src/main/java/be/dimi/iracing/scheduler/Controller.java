@@ -1,5 +1,6 @@
 package be.dimi.iracing.scheduler;
 
+import be.dimi.iracing.scheduler.csv.CsvHandler;
 import be.dimi.iracing.scheduler.model.Clock;
 import be.dimi.iracing.scheduler.model.RacingList;
 import be.dimi.iracing.scheduler.race.RaceModel;
@@ -30,15 +31,17 @@ public class Controller
     @FXML
     protected void initialize(){
         Clock.showLocalClock(localLabel);
+        CsvHandler.handleCsv();
         RacingList.fillList(scheduleList);
-        try {
-            ListSaver.readList();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            ListSaver.readList();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void refresh(){
+        CsvHandler.handleCsv();
         RacingList.refresh();
     }
 
