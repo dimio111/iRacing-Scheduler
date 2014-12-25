@@ -46,7 +46,7 @@ public class MainApp extends Application {
         Scene scene = new Scene(rootNode, 650, 475);
 //        scene.getStylesheets().add("/styles/styles.css");
 
-        setMenus(scene, stage);
+       // setMenus(scene, stage);
         stage.setMaxHeight(490);
         stage.setMaxWidth(650);
         stage.setResizable(false);

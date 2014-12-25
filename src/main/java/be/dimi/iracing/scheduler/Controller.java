@@ -24,13 +24,11 @@ public class Controller
 {
     private static final Logger log = LoggerFactory.getLogger(Controller.class);
 
-    @FXML private Label gmtLabel;
     @FXML private Label localLabel;
     @FXML private ListView<RaceModel> scheduleList;
 
     @FXML
     protected void initialize(){
-        Clock.showGmtClock(gmtLabel);
         Clock.showLocalClock(localLabel);
         RacingList.fillList(scheduleList);
         try {

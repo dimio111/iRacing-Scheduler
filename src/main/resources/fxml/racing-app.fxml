@@ -11,25 +11,10 @@
       <ListView fx:id="scheduleList" editable="true" layoutX="33.0" layoutY="36.0" prefHeight="326.0" prefWidth="585.0" />
       <RadioButton layoutX="247.0" layoutY="433.0" mnemonicParsing="false" text="Oval" />
       <RadioButton layoutX="247.0" layoutY="397.0" mnemonicParsing="false" text="Road" />
-      <Label fx:id="gmtLabel" layoutX="90.0" layoutY="385.0" prefHeight="41.0" prefWidth="128.0" text="GMT" textAlignment="CENTER">
-        <font>
-            <Font size="22.0" />
-        </font>
-      </Label>
-      <Label fx:id="localLabel" layoutX="90.0" layoutY="426.0" prefHeight="29.0" prefWidth="113.0" text="Local" textAlignment="CENTER">
+      <Label fx:id="localLabel" layoutX="33.0" layoutY="385.0" prefHeight="29.0" prefWidth="146.0" text="Local" textAlignment="CENTER">
         <font>
             <Font size="22.0" />
         </font>
       </Label>
       <Button fx:id="refreshButton" layoutX="359.0" layoutY="406.0" mnemonicParsing="false" onAction="#refresh" prefHeight="33.0" prefWidth="113.0" text="Refresh" />
-      <Label fx:id="gmtLabel1" layoutX="33.0" layoutY="385.0" prefHeight="41.0" prefWidth="49.0" text="GMT:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="gmtLabel2" layoutX="33.0" layoutY="422.0" prefHeight="41.0" prefWidth="49.0" text="Local:" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
     </children></AnchorPane>

@@ -19,21 +19,6 @@ import java.util.TimeZone;
  */
 public class Clock {
 
-    public static void showGmtClock(final Label gmtLabel){
-        final DateFormat format = new SimpleDateFormat("HH:mm:ss");
-        format.setTimeZone(TimeZone.getTimeZone("Europe/London"));
-        final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-                final Calendar cal = GregorianCalendar.getInstance();
-                gmtLabel.setText(format.format(cal.getTime()));
-            }
-        }));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-    }
-
     public static void showLocalClock(final Label gmtLabel){
         final DateFormat format = new SimpleDateFormat("HH:mm:ss");
         final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
