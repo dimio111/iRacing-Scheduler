@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -36,11 +37,19 @@ public class RacingList {
     public static void filterList(){
         List<RaceModel> toBeRemoved = new ArrayList<>();
         Date date = new Date();
+        long timezoneAlteredTime = date.getTime() - Calendar.getInstance().getTimeZone().getRawOffset();
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/London"));
+        cal.setTimeInMillis(timezoneAlteredTime);
+
         for(RaceModel raceModel : observableList){
-           if(raceModel.getDate().before(date)){
+           if(raceModel.getDate().before(cal.getTime())){
                toBeRemoved.add(raceModel);
            }
         }
         observableList.removeAll(toBeRemoved);
+    }
+
+    public static ListView<RaceModel> getStoredListView() {
+        return storedListView;
     }
 }

@@ -1,6 +1,7 @@
 package be.dimi.iracing.scheduler;
 
 import be.dimi.iracing.scheduler.csv.CsvHandler;
+import be.dimi.iracing.scheduler.save.ListSaver;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -82,5 +84,16 @@ public class MainApp extends Application {
         });
     }
 
-
+    private void setFileSaveAction(MenuItem menuItem){
+        menuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent Event) {
+                try {
+                    ListSaver.saveList();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }
