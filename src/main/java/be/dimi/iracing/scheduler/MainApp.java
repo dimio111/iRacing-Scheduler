@@ -1,6 +1,5 @@
 package be.dimi.iracing.scheduler;
 
-import be.dimi.iracing.scheduler.csv.CsvHandler;
 import be.dimi.iracing.scheduler.save.ListSaver;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -12,26 +11,25 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooserBuilder;
 import javafx.stage.Stage;
+import org.apache.log4j.PropertyConfigurator;
 
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainApp extends Application {
 
-    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(MainApp.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(MainApp.class);
     private Stage stage = null;
 
     public static void main(String[] args) throws Exception {
+        PropertyConfigurator.configure("files/log4j.properties");
         launch(args);
     }
 
     public void start(Stage stage) throws Exception {
+
         this.stage = stage;
         log.info("Starting iRacing Scheduler " + new SimpleDateFormat("mm/dd/yyyy").format(new Date()));
         String fxmlFile = "/fxml/racing-app.fxml";
