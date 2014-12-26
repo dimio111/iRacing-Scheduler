@@ -1,13 +1,15 @@
 package be.dimi.iracing.scheduler.csv;
 
 import au.com.bytecode.opencsv.CSVReader;
+import be.dimi.iracing.scheduler.dropbox.Dropbox;
 import be.dimi.iracing.scheduler.model.RacingList;
 import be.dimi.iracing.scheduler.race.RaceModel;
 import be.dimi.iracing.scheduler.race.TrackType;
+import com.dropbox.core.DbxEntry;
+import com.dropbox.core.DbxException;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,6 @@ public class CsvHandler {
 
     public static void handleCsv() {
         File csvFileFolder = new File("files");
-csvFileFolder.mkdir();
         if (csvFileFolder.isDirectory() && csvFileFolder.listFiles() != null) {
             for (File csvFile : csvFileFolder.listFiles()) {
                 if(csvFile.getName().startsWith("OvalSeries") || csvFile.getName().startsWith("RoadSeries")){
@@ -32,6 +33,42 @@ csvFileFolder.mkdir();
                 }
             }
         }
+    }
+
+    public static void handleOnlineCsv() {
+        List<URL> urls = new ArrayList<>();
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream("RoadSeries.csv");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            DbxEntry.File downloadedFile = null;
+            try {
+                downloadedFile = Dropbox.authenticate().getFile("/RoadSeries.csv", null,
+                        outputStream);
+            } catch (DbxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Metadata: " + downloadedFile.toString());
+        } finally {
+            try {
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+                try (CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream("RoadSeries.csv")))) {
+                    List<RaceModel> myEntries2 = parseList(reader.readAll(), TrackType.ROAD);
+                    RacingList.addToRacingList(myEntries2);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
     }
 
     private static List<RaceModel> parseList(List<String[]> entries, TrackType trackType) {

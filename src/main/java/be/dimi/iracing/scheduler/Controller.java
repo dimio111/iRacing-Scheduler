@@ -31,7 +31,8 @@ public class Controller
     @FXML
     protected void initialize(){
         Clock.showLocalClock(localLabel);
-        CsvHandler.handleCsv();
+        //CsvHandler.handleCsv();
+        CsvHandler.handleOnlineCsv();
         RacingList.fillList(scheduleList);
 //        try {
 //            ListSaver.readList();
@@ -41,7 +42,8 @@ public class Controller
     }
 
     public void refresh(){
-        CsvHandler.handleCsv();
+        CsvHandler.handleOnlineCsv();
+       // CsvHandler.handleCsv();
         RacingList.refresh();
     }
 
