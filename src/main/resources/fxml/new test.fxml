@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.MainController">
     <children>
       <Button fx:id="alarm" layoutX="512.0" layoutY="318.0" mnemonicParsing="false" onAction="#alarm" prefHeight="33.0" prefWidth="113.0" text="Alarm" />
       <Label layoutX="369.0" layoutY="20.0" prefHeight="32.0" prefWidth="60.0" text="Time:" textAlignment="CENTER">

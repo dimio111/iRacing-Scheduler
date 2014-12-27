@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +23,7 @@ public class MainApp extends Application {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(MainApp.class);
     private Stage stage = null;
+    private MainController mainController;
 
     public static void main(String[] args) throws Exception {
         PropertyConfigurator.configure("files/log4j.properties");
@@ -34,14 +36,18 @@ public class MainApp extends Application {
         log.info("Starting iRacing Scheduler " + new SimpleDateFormat("mm/dd/yyyy").format(new Date()));
         String fxmlFile = "/fxml/racing-app.fxml";
 
+
         FXMLLoader loader = new FXMLLoader();
+        URL location = getClass (  ) . getResource ( fxmlFile ) ;
+        loader.setLocation(location);
         Parent rootNode = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
+
 
         log.debug("Showing JFX scene");
         Scene scene = new Scene(rootNode, 650, 475);
 //        scene.getStylesheets().add("/styles/styles.css");
 
-       // setMenus(scene, stage);
+        // setMenus(scene, stage);
         stage.setMaxHeight(490);
         stage.setMaxWidth(650);
         stage.setResizable(false);
@@ -49,7 +55,8 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
 
-
+        mainController = (MainController) loader.getController();
+        mainController.getLocalController().setText("bla");
     }
 
     private void setMenus(Scene scene, Stage link) {
@@ -81,7 +88,7 @@ public class MainApp extends Application {
 //        });
 //    }
 
-    private void setFileSaveAction(MenuItem menuItem){
+    private void setFileSaveAction(MenuItem menuItem) {
         menuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent Event) {

@@ -1,10 +1,10 @@
 package be.dimi.iracing.scheduler;
 
+import be.dimi.iracing.scheduler.controllers.LocalController;
 import be.dimi.iracing.scheduler.csv.CsvHandler;
 import be.dimi.iracing.scheduler.model.Clock;
 import be.dimi.iracing.scheduler.model.RacingList;
 import be.dimi.iracing.scheduler.race.RaceModel;
-import be.dimi.iracing.scheduler.save.ListSaver;
 import be.dimi.iracing.scheduler.timer.RacingTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,20 +17,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Controller
-{
-    private static final Logger log = LoggerFactory.getLogger(Controller.class);
+public class MainController {
+    private static final Logger log = LoggerFactory.getLogger(MainController.class);
 
-    @FXML private Label localLabel;
+    //The id in the fxml is localLabel, but the injection here needs to be localLabelController
+    @FXML private LocalController localLabelController;
     @FXML private ListView<RaceModel> scheduleList;
+
 
     @FXML
     protected void initialize(){
-        Clock.showLocalClock(localLabel);
+        Clock.showLocalClock(localLabelController.getLocalLabel());
         //CsvHandler.handleCsv();
         CsvHandler.handleOnlineCsv();
         RacingList.fillList(scheduleList);
@@ -73,4 +72,13 @@ public class Controller
         stage.setScene(scene);
         stage.show();
     }
+
+    public LocalController getLocalController(){
+        return localLabelController;
+    }
+
+    public void setText(String t){
+        //localLabel.setText(t);
+    }
+
 }

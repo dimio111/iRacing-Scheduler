@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+
+<Label layoutX="33.0" layoutY="389.0" fx:id="localLabel" text="local" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.controllers.LocalController"/>
