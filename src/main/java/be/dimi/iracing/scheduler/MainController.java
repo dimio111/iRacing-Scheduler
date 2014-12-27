@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -55,7 +54,7 @@ public class MainController {
         Timer timer = new Timer();
         timer.schedule(new RacingTimer(), cal.getTime());
 
-        String fxmlFile = "/fxml/alarm-set.fxml";
+        String fxmlFile = "/fxml/popups/alarm-set.fxml";
         FXMLLoader loader = new FXMLLoader();
         Parent rootNode = null;
         try {

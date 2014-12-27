@@ -20,7 +20,7 @@ public class RacingTimer extends TimerTask {
         Platform.runLater(new Runnable() {
             public void run() {
                 final JDialog jDialog = new JDialog();
-                String fxmlFile = "/fxml/race-time.fxml";
+                String fxmlFile = "/fxml/popups/race-time.fxml";
                 FXMLLoader loader = new FXMLLoader();
                 Parent rootNode = null;
                 try {

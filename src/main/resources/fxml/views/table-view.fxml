@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+
+<TableView maxWidth="-Infinity" prefHeight="265.0" prefWidth="1900.0" tableMenuButtonVisible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.controllers.TableViewController">
+    <columns>
+        <TableColumn editable="false" maxWidth="300.0" minWidth="85.0" prefWidth="300.0" sortable="false" text="DATE" />
+        <TableColumn editable="false" maxWidth="300.0" minWidth="85.0" prefWidth="300.0" sortable="false" text="HOUR" />
+        <TableColumn editable="false" prefWidth="300.0" sortable="false" text="RACE" />
+    </columns>
+    <columnResizePolicy>
+        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+    </columnResizePolicy>
+</TableView>

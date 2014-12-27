@@ -1,29 +1,19 @@
 package be.dimi.iracing.scheduler;
 
-import be.dimi.iracing.scheduler.save.ListSaver;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.apache.log4j.PropertyConfigurator;
 
-import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainApp extends Application {
 
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(MainApp.class);
-    private Stage stage = null;
-    private MainController mainController;
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(MainApp.class);
 
     public static void main(String[] args) throws Exception {
         PropertyConfigurator.configure("files/log4j.properties");
@@ -32,22 +22,18 @@ public class MainApp extends Application {
 
     public void start(Stage stage) throws Exception {
 
-        this.stage = stage;
-        log.info("Starting iRacing Scheduler " + new SimpleDateFormat("mm/dd/yyyy").format(new Date()));
+        LOG.info("Starting iRacing Scheduler " + new SimpleDateFormat("mm/dd/yyyy").format(new Date()));
         String fxmlFile = "/fxml/racing-app.fxml";
-
+        LOG.debug("Using fxml: " + fxmlFile);
 
         FXMLLoader loader = new FXMLLoader();
         URL location = getClass (  ) . getResource ( fxmlFile ) ;
         loader.setLocation(location);
         Parent rootNode = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
 
-
-        log.debug("Showing JFX scene");
+        LOG.debug("Showing JFX scene");
         Scene scene = new Scene(rootNode, 650, 475);
-//        scene.getStylesheets().add("/styles/styles.css");
 
-        // setMenus(scene, stage);
         stage.setMaxHeight(490);
         stage.setMaxWidth(650);
         stage.setResizable(false);
@@ -55,49 +41,6 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
 
-        mainController = (MainController) loader.getController();
-        mainController.getLocalController().setText("bla");
-    }
-
-    private void setMenus(Scene scene, Stage link) {
-        MenuBar menuBar = new MenuBar();
-        menuBar.setMinWidth(660);
-        // --- Menu File
-        Menu menuFile = new Menu("File");
-        MenuItem openItem = new MenuItem("Open");
-        //MenuItem saveItem = new MenuItem("Save");
-        //setFileOpenAction(openItem);
-        menuFile.getItems().addAll(openItem);
-        menuBar.getMenus().addAll(menuFile);
-        ((AnchorPane) scene.getRoot()).getChildren().addAll(menuBar);
-    }
-
-//    private void setFileOpenAction(MenuItem menuItem){
-//        menuItem.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent Event) {
-//                String currentDir = FileSystemView.getFileSystemView().getHomeDirectory() + File.separator;
-//
-//                FileChooserBuilder fcb = FileChooserBuilder.create();
-//                FileChooser fc = fcb.title("Open Dialog").initialDirectory(new File(currentDir)).build();
-//                File selectedFile = fc.showOpenDialog(stage);
-//                if(selectedFile != null){
-//                    CsvHandler.handleCsv(selectedFile.getPath());
-//                }
-//            }
-//        });
-//    }
-
-    private void setFileSaveAction(MenuItem menuItem) {
-        menuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent Event) {
-                try {
-                    ListSaver.saveList();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        LOG.debug("JFX scene loaded");
     }
 }
