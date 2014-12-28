@@ -120,7 +120,7 @@
                   </Button>
                   <Label fx:id="localTime" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
-                        <Insets />
+                        <Insets left="30.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Bold" size="17.0" />

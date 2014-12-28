@@ -5,4 +5,5 @@ package be.dimi.iracing.scheduler.race;
  */
 public enum TrackType {
     OVAL,ROAD
+
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.controllers.BottomViewController">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.controllers.LabelViewController">
     <children>
 
         <HBox prefHeight="100.0" prefWidth="200.0">
@@ -41,7 +41,10 @@
                         </Label>
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0"/>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Label fx:id="roadType" />
+                    </children></HBox>
             </children>
         </HBox>
         <HBox prefHeight="100.0" prefWidth="200.0">

@@ -11,11 +11,57 @@ import java.util.Date;
  */
 public class RaceModel implements Comparable<RaceModel>, Serializable{
 
+    private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYY");
+    private static final DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+
     private Date date;
+    private String raceDay;
+    private String raceHour;
     private String series;
     private String track;
     private TrackType trackType;
     private int laps;
+    private boolean alarmSet;
+
+    public static DateFormat getDateFormat() {
+        return dateFormat;
+    }
+
+    public static DateFormat getHourFormat() {
+        return hourFormat;
+    }
+
+    public String getRaceDay() {
+        return raceDay;
+    }
+
+    public String getRaceHour() {
+        return raceHour;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public String getTrack() {
+        return track;
+    }
+
+    public TrackType getTrackType() {
+        return trackType;
+    }
+
+    public int getLaps() {
+        return laps;
+    }
+
+    public boolean isAlarmSet() {
+        return alarmSet;
+    }
+
+    public void setAlarmSet(boolean alarmSet) {
+        this.alarmSet = alarmSet;
+    }
 
     public Date getDate() {
         return this.date;
@@ -23,9 +69,6 @@ public class RaceModel implements Comparable<RaceModel>, Serializable{
 
     @Override
     public String toString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYY");
-        DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
-
         return  dateFormat.format(date) + "\t" + hourFormat.format(date)
                 + "\t" +  series  + "\t" +
                 track  + "\t" +
@@ -62,6 +105,8 @@ public class RaceModel implements Comparable<RaceModel>, Serializable{
         }
 
         public RaceModel build(){
+            raceModel.raceDay = dateFormat.format(raceModel.date);
+            raceModel.raceHour = hourFormat.format(raceModel.date);
             return raceModel;
         }
         public Builder date(final String str){

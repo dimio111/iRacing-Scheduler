@@ -8,6 +8,7 @@ import be.dimi.iracing.scheduler.race.TrackType;
 import com.dropbox.core.DbxEntry;
 import com.dropbox.core.DbxException;
 
+import javax.sound.midi.Track;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,60 +19,26 @@ import java.util.List;
  */
 public class CsvHandler {
 
-    public static void handleCsv() {
-        File csvFileFolder = new File("files");
-        if (csvFileFolder.isDirectory() && csvFileFolder.listFiles() != null) {
-            for (File csvFile : csvFileFolder.listFiles()) {
-                if(csvFile.getName().startsWith("OvalSeries") || csvFile.getName().startsWith("RoadSeries")){
-                    TrackType trackType = csvFile.getName().startsWith("OvalSeries") ? TrackType.OVAL : TrackType.ROAD;
-                    try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
-                        List<RaceModel> myEntries2 = parseList(reader.readAll(), trackType);
-                        RacingList.addToRacingList(myEntries2);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-    }
+    public List<RaceModel> handleOnlineCsv(String fileName) {
+        TrackType trackType = resolveTracktype(fileName);
+        List<RaceModel> returnRaceModelList = new ArrayList<>();
 
-    public static void handleOnlineCsv() {
-        List<URL> urls = new ArrayList<>();
-        FileOutputStream outputStream = null;
-        try {
-            outputStream = new FileOutputStream("RoadSeries.csv");
-        } catch (FileNotFoundException e) {
+        try (ByteArrayOutputStream file = new ByteArrayOutputStream()) {
+
+            DbxEntry.File downloadedFile = Dropbox.authenticate().getFile("/"+fileName+".csv", null, file);
+
+            CSVReader reader = new CSVReader((new InputStreamReader(new ByteArrayInputStream(file.toByteArray()))));
+            List<RaceModel> myEntries2 = parseList(reader.readAll(), trackType);
+            returnRaceModelList.addAll(myEntries2);
+
+        } catch (IOException | DbxException e) {
             e.printStackTrace();
         }
-        try {
-            DbxEntry.File downloadedFile = null;
-            try {
-                downloadedFile = Dropbox.authenticate().getFile("/RoadSeries.csv", null,
-                        outputStream);
-            } catch (DbxException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Metadata: " + downloadedFile.toString());
-        } finally {
-            try {
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
-                try (CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream("RoadSeries.csv")))) {
-                    List<RaceModel> myEntries2 = parseList(reader.readAll(), TrackType.ROAD);
-                    RacingList.addToRacingList(myEntries2);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+        return returnRaceModelList;
     }
 
-    private static List<RaceModel> parseList(List<String[]> entries, TrackType trackType) {
+    private List<RaceModel> parseList(List<String[]> entries, TrackType trackType) {
         List<RaceModel> racingEntry = new ArrayList<RaceModel>();
         entries.remove(0);
         for (String[] str : entries) {
@@ -79,4 +46,13 @@ public class CsvHandler {
         }
         return racingEntry;
     }
+
+    private TrackType resolveTracktype(String filename){
+        if("RoadSeries".equals(filename)){
+            return TrackType.ROAD;
+        }else{
+            return TrackType.OVAL;
+        }
+    }
+
 }
