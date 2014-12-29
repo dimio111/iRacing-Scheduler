@@ -1,22 +1,18 @@
 package be.dimi.iracing.scheduler;
 
-import be.dimi.iracing.scheduler.controllers.BottomViewController;
 import be.dimi.iracing.scheduler.manager.ControllerManager;
-import be.dimi.iracing.scheduler.tasks.ClearMessage;
 import be.dimi.iracing.scheduler.tasks.SetRaceListTask;
+import be.dimi.iracing.scheduler.tasks.VersionCheckTask;
 import be.dimi.iracing.scheduler.version.Version;
-import be.dimi.iracing.scheduler.version.VersionHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.apache.log4j.PropertyConfigurator;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
 
 public class MainApp extends Application {
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(MainApp.class);
@@ -25,12 +21,11 @@ public class MainApp extends Application {
     private ControllerManager controllerManager = ControllerManager.getControllerManager();
 
     public static void main(String[] args) throws Exception {
-        PropertyConfigurator.configure("files/log4j.properties");
         launch(args);
     }
 
     public void start(Stage stage) throws Exception {
-        LOG.info("Starting iRacing Scheduler " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        LOG.debug("Starting iRacing Scheduler " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 
         FXMLLoader loader = new FXMLLoader();
 
@@ -77,14 +72,8 @@ public class MainApp extends Application {
     }
 
     private void checkVersion() {
-        VersionHandler versionHandler = new VersionHandler();
-        Version latestVersion = versionHandler.checkForNewVersion(VERSION);
-        BottomViewController bottomViewController = controllerManager.getBottomViewController();
-
-        bottomViewController.setMessage2(latestVersion.getMessage());
-
-        Timer timer = new Timer();
-        timer.schedule(new ClearMessage("message2"), 10000);
-
+        Thread fillListThread = new Thread(new VersionCheckTask(VERSION));
+        fillListThread.setDaemon(true);
+        fillListThread.start();
     }
 }

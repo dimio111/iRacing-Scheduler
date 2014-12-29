@@ -12,9 +12,9 @@ public class Dropbox {
     public static DbxClient authenticate() {
 
         DbxRequestConfig config = new DbxRequestConfig(
-                "iRacing Schedular", Locale.getDefault().toString());
+                "iRacing Scheduler", Locale.getDefault().toString());
 
-        String accessToken = "OkCM_6XruG8AAAAAAAAABphu3zV-Y86KtSUnJkQy4kUyi-AJcZxmpQd5ECcqDYkF";
+        String accessToken = "OkCM_6XruG8AAAAAAAAABxUbiTedExunrrZ9m1Re2sQuZO90dOhanVs6pny7eqvx";
 
         return new DbxClient(config, accessToken);
     }
