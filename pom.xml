@@ -9,8 +9,9 @@
     <name>iRacing-Scheduler</name>
 
     <packaging>jar</packaging>
-    <version>0.1.2</version>
-
+    <!-- Don't forget to update the version in the main class to! -->
+    <version>0.2.1</version>
+    <!-- Don't forget to update the version in the main class to! -->
     <organization>
         <!-- Used as the 'Vendor' for JNLP generation -->
         <name>Dimitri Saeys</name>

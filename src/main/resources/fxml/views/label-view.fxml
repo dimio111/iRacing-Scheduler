@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8"
+<VBox maxHeight="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.controllers.LabelViewController">
     <children>
-
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
             <children>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                     <children>
@@ -30,7 +26,29 @@
                 </HBox>
             </children>
         </HBox>
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
+            <children>
+                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Label prefHeight="26.0" prefWidth="47.0" text="Track:">
+                            <font>
+                                <Font size="17.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Label fx:id="track">
+                            <font>
+                                <Font size="12.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+        <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
             <children>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                     <children>
@@ -43,11 +61,12 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Label fx:id="roadType" />
-                    </children></HBox>
+                        <Label fx:id="roadType"/>
+                    </children>
+                </HBox>
             </children>
         </HBox>
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
             <children>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                     <children>
@@ -65,7 +84,7 @@
                 </HBox>
             </children>
         </HBox>
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
             <children>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                     <children>

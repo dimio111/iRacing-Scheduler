@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Dimitri on 15/11/2014.
@@ -79,16 +81,30 @@ public class RaceModel implements Comparable<RaceModel>, Serializable{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof RaceModel)) return false;
+
         RaceModel raceModel = (RaceModel) o;
-        if (!date.equals(raceModel.date)) return false;
+
+        if (laps != raceModel.laps) return false;
+        if (date != null ? !date.equals(raceModel.date) : raceModel.date != null) return false;
+        if (raceDay != null ? !raceDay.equals(raceModel.raceDay) : raceModel.raceDay != null) return false;
+        if (raceHour != null ? !raceHour.equals(raceModel.raceHour) : raceModel.raceHour != null) return false;
+        if (series != null ? !series.equals(raceModel.series) : raceModel.series != null) return false;
+        if (track != null ? !track.equals(raceModel.track) : raceModel.track != null) return false;
+        if (trackType != raceModel.trackType) return false;
+
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = date.hashCode();
-        result = 31 * result;
+        int result = date != null ? date.hashCode() : 0;
+        result = 31 * result + (raceDay != null ? raceDay.hashCode() : 0);
+        result = 31 * result + (raceHour != null ? raceHour.hashCode() : 0);
+        result = 31 * result + (series != null ? series.hashCode() : 0);
+        result = 31 * result + (track != null ? track.hashCode() : 0);
+        result = 31 * result + (trackType != null ? trackType.hashCode() : 0);
+        result = 31 * result + laps;
         return result;
     }
 
@@ -111,8 +127,14 @@ public class RaceModel implements Comparable<RaceModel>, Serializable{
         }
         public Builder date(final String str){
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyHH:mm:ss");
+
             try {
-                raceModel.date = formatter.parse(str);
+                Date date = formatter.parse(str);
+                Calendar localCalendar = Calendar.getInstance();
+                localCalendar.setTime(date);
+                localCalendar.add(Calendar.MILLISECOND, localCalendar.getTimeZone().getRawOffset());
+
+                raceModel.date = localCalendar.getTime();
             } catch (ParseException e) {
                 e.printStackTrace();
             }

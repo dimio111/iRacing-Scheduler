@@ -26,32 +26,4 @@ public class MainController {
     public TableViewController getTableViewController() {
         return tableViewController;
     }
-
-
-    public void alarm(){
-//        long timezoneAlteredTime = scheduleList.getSelectionModel().getSelectedItem().getDate().getTime() + Calendar.getInstance().getTimeZone().getRawOffset();
-//        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/London"));
-//        cal.setTimeInMillis(timezoneAlteredTime);
-//
-//        Timer timer = new Timer();
-//        timer.schedule(new RacingTimer(), cal.getTime());
-//
-//        String fxmlFile = "/fxml/popups/alarm-set.fxml";
-//        FXMLLoader loader = new FXMLLoader();
-//        Parent rootNode = null;
-//        try {
-//            rootNode = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        log.debug("Showing JFX scene");
-//        Scene scene = new Scene(rootNode, 350, 170);
-//        Stage stage = new Stage();
-//
-//        stage.setResizable(false);
-//        stage.setScene(scene);
-//        stage.show();
-    }
-
 }

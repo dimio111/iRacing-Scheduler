@@ -1,4 +1,4 @@
-package be.dimi.iracing.scheduler.timer;
+package be.dimi.iracing.scheduler.tasks;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;

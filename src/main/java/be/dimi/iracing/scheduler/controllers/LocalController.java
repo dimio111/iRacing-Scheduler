@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
  */
 public class LocalController{
 
-
     @FXML
     private Label localLabel;
 
@@ -25,6 +24,5 @@ public class LocalController{
     public Label getLocalLabel() {
         return localLabel;
     }
-
 
 }

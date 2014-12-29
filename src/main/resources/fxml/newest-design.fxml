@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.MainController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.dimi.iracing.scheduler.MainController">
    <children>
-      <SplitPane dividerPositions="0.5" maxHeight="-Infinity" prefHeight="900.0" prefWidth="600.0">
+       <SplitPane dividerPositions="0.6" maxHeight="-Infinity" prefHeight="900.0" prefWidth="600.0">
         <items>
             <fx:include  fx:id="tableView" source="/fxml/views/table-view.fxml" />
             <fx:include  fx:id="labelView" source="/fxml/views/label-view.fxml" />
         </items>
       </SplitPane>
-      <HBox fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="93.0" prefWidth="1900.0" VBox.vgrow="ALWAYS">
+       <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
              <fx:include  fx:id="bottomView" source="/fxml/views/bottom-view.fxml" />
          </children></HBox>
    </children>
 </VBox>
+
