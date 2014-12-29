@@ -4,7 +4,7 @@ import be.dimi.iracing.scheduler.manager.ControllerManager;
 import be.dimi.iracing.scheduler.model.Clock;
 import be.dimi.iracing.scheduler.race.RaceModel;
 import be.dimi.iracing.scheduler.tasks.ClearMessage;
-import be.dimi.iracing.scheduler.tasks.SetRaceListTask;
+import be.dimi.iracing.scheduler.tasks.SetRaceTableTask;
 import be.dimi.iracing.scheduler.tasks.RacingTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -70,7 +70,7 @@ public class BottomViewController {
 
     public void refresh() {
         ControllerManager controllerManager = ControllerManager.getControllerManager();
-        Thread fillListThread = new Thread(new SetRaceListTask(controllerManager.getTableViewController().getRaceData()));
+        Thread fillListThread = new Thread(new SetRaceTableTask(controllerManager.getTableViewController().getRaceData()));
         fillListThread.setDaemon(true);
         fillListThread.start();
     }

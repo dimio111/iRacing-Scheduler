@@ -1,7 +1,7 @@
 package be.dimi.iracing.scheduler;
 
 import be.dimi.iracing.scheduler.manager.ControllerManager;
-import be.dimi.iracing.scheduler.tasks.SetRaceListTask;
+import be.dimi.iracing.scheduler.tasks.SetRaceTableTask;
 import be.dimi.iracing.scheduler.tasks.VersionCheckTask;
 import be.dimi.iracing.scheduler.version.Version;
 import javafx.application.Application;
@@ -62,7 +62,7 @@ public class MainApp extends Application {
     }
 
     private void initializeRaces() {
-        Thread fillListThread = new Thread(new SetRaceListTask(controllerManager.getTableViewController().getRaceData()));
+        Thread fillListThread = new Thread(new SetRaceTableTask(controllerManager.getTableViewController().getRaceData()));
         fillListThread.setDaemon(true);
         fillListThread.start();
     }
