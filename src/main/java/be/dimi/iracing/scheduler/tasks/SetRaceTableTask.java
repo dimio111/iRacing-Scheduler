@@ -27,8 +27,13 @@ public class SetRaceTableTask implements Runnable{
         List<RaceModel> ovalSeries = csvHandler.handleOnlineCsv("OvalSeries");
         if(roadSeries != null || ovalSeries != null){
             raceData.clear();
-            raceData.addAll(roadSeries);
-            raceData.addAll(ovalSeries);
+
+            if(roadSeries != null){
+                raceData.addAll(roadSeries);
+            }
+            if(ovalSeries != null){
+                raceData.addAll(ovalSeries);
+            }
         }
         new ClearMessage(message).run();
     }

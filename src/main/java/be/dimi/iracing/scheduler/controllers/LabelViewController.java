@@ -86,7 +86,7 @@ public class LabelViewController {
         final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                final Date timeUntilRade = new Date(raceDate.getTime() - new Date().getTime());
+                final Date timeUntilRade = new Date(raceDate.getTime()-System.currentTimeMillis());
                 timeUntilRace.setText(format.format(timeUntilRade));
             }
         }));

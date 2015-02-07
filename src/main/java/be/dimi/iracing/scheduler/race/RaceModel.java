@@ -121,8 +121,6 @@ public class RaceModel implements Comparable<RaceModel>, Serializable{
         }
 
         public RaceModel build(){
-            raceModel.raceDay = dateFormat.format(raceModel.date);
-            raceModel.raceHour = hourFormat.format(raceModel.date);
             return raceModel;
         }
         public Builder date(final String str){
@@ -134,7 +132,11 @@ public class RaceModel implements Comparable<RaceModel>, Serializable{
                 localCalendar.setTime(date);
                 localCalendar.add(Calendar.MILLISECOND, localCalendar.getTimeZone().getRawOffset());
 
-                raceModel.date = localCalendar.getTime();
+                date = localCalendar.getTime();
+                raceModel.date = date;
+                raceModel.raceDay = dateFormat.format(date);
+                raceModel.raceHour = hourFormat.format(date);
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
