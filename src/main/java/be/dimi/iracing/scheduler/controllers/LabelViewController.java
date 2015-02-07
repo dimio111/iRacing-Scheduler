@@ -18,8 +18,6 @@ import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -29,6 +27,7 @@ public class LabelViewController {
     private static final PeriodFormatter dateFormat =
             new PeriodFormatterBuilder()
                     .minimumPrintedDigits(2)
+                    .printZeroAlways()
                     .appendHours()
                     .minimumPrintedDigits(2)
                     .appendSeparator(":")
@@ -39,6 +38,8 @@ public class LabelViewController {
                     .toFormatter();
 
     TableView<RaceModel> raceModelTableView;
+
+    private Timeline timeline = null;
 
     @FXML
     private Label laps;
@@ -89,14 +90,27 @@ public class LabelViewController {
 
     public void setTimeUntilRace(final Date raceDate) {
         final DateTime raceTime = new DateTime(raceDate.getTime());
-        final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+        final Timeline newTimeLine = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Period period = new Period(new DateTime(), raceTime);
                 timeUntilRace.setText(period.toString(dateFormat));
             }
         }));
-        timeline.setCycleCount(Animation.INDEFINITE);
+        newTimeLine.setCycleCount(Animation.INDEFINITE);
+        setTimeline(newTimeLine);
+    }
+
+    private void clearTimeline() {
+        if (this.timeline != null) {
+            this.timeline.stop();
+            this.timeline = null;
+        }
+    }
+
+    public void setTimeline(Timeline timeline) {
+        clearTimeline();
+        this.timeline = timeline;
         timeline.play();
     }
 
