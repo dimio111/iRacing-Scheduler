@@ -13,6 +13,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.util.Duration;
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,6 +26,17 @@ import java.util.Date;
  * Created by Dimitri on 28/12/2014.
  */
 public class LabelViewController {
+    private static final PeriodFormatter dateFormat =
+            new PeriodFormatterBuilder()
+                    .minimumPrintedDigits(2)
+                    .appendHours()
+                    .minimumPrintedDigits(2)
+                    .appendSeparator(":")
+                    .appendMinutes()
+                    .minimumPrintedDigits(2)
+                    .appendSeparator(":")
+                    .appendSeconds()
+                    .toFormatter();
 
     TableView<RaceModel> raceModelTableView;
 
@@ -63,15 +78,6 @@ public class LabelViewController {
         });
     }
 
-    public void setTimeUntilRace(final String timeUntilRaceText) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                timeUntilRace.setText(timeUntilRaceText);
-            }
-        });
-    }
-
     public void setRoadType(final String roadTypeText) {
         Platform.runLater(new Runnable() {
             @Override
@@ -82,12 +88,12 @@ public class LabelViewController {
     }
 
     public void setTimeUntilRace(final Date raceDate) {
-        final DateFormat format = new SimpleDateFormat("HH:mm:ss");
+        final DateTime raceTime = new DateTime(raceDate.getTime());
         final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                final Date timeUntilRade = new Date(raceDate.getTime()-System.currentTimeMillis());
-                timeUntilRace.setText(format.format(timeUntilRade));
+                Period period = new Period(new DateTime(), raceTime);
+                timeUntilRace.setText(period.toString(dateFormat));
             }
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -95,7 +101,8 @@ public class LabelViewController {
     }
 
     public void setAll(RaceModel raceModel) {
-        if(raceModelTableView.getSelectionModel().getSelectedItem().equals(raceModel)){
+        if (raceModelTableView.getSelectionModel().getSelectedItem().equals(raceModel)) {
+            setTimeUntilRace(raceModel.getDate());
             setLaps(String.valueOf(raceModel.getLaps()));
             if (raceModel.isAlarmSet()) {
                 setAlarmSet("Yes");
@@ -104,7 +111,6 @@ public class LabelViewController {
             }
             setTrack(raceModel.getTrack());
             setRoadType(raceModel.getTrackType().toString());
-            setTimeUntilRace(raceModel.getDate());
         }
     }
 
